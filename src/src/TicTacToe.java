@@ -4,6 +4,8 @@ import java.util.Scanner;
 public class TicTacToe {
 
     private static int[][] grid = new int[3][3];
+    final static int AI_TILE = -1;
+    final static int PLAYER_TILE = 0;
 
     public static void main(String[] args) {
 
@@ -106,6 +108,8 @@ public class TicTacToe {
         
         Random randomGenerator = new Random();
         boolean valid;
+
+
         int caseO1;
         int caseO2;
         
@@ -115,10 +119,10 @@ public class TicTacToe {
             caseO1 = randomGenerator.nextInt(3);
             caseO2 = randomGenerator.nextInt(3);
             
-            if (grid[caseO1][caseO2] == 0 || grid[caseO1][caseO2] == -1){
+            if (grid[caseO1][caseO2] == PLAYER_TILE || grid[caseO1][caseO2] == AI_TILE){
                 valid = false;
             } else {
-                grid[caseO1][caseO2] = -1;
+                grid[caseO1][caseO2] = AI_TILE;
                 valid = true;
             }
         } while (valid == false);
