@@ -42,21 +42,21 @@ public class TicTacToe {
     
     public static void tourJoueur (int[][] intArray) {
         
-        Scanner lecteur = new Scanner(System.in);
-        boolean valide;
+        Scanner scanner = new Scanner(System.in);
+        boolean valid;
         int caseX;
         
         do {
               System.out.printf("Sélectionnez une case (1-9): ");
-              caseX = lecteur.nextInt();
+              caseX = scanner.nextInt();
               
               if (caseX < 1 || caseX > 9) {
-                  valide = false;
+                  valid = false;
                   System.out.println("Valeur doit etre entre 1 et 9");
               } else {
-                  valide = true;
+                  valid = true;
               }
-          } while (valide == false);
+          } while (valid == false);
         
         switch (caseX) {
             case 1 : intArray[0][0] = 0;break;
@@ -74,7 +74,7 @@ public class TicTacToe {
     public static void tourIA (int[][] intArray) {
         
         Random randomGenerator = new Random();
-        boolean valide;
+        boolean valid;
         int caseO1;
         int caseO2;
         
@@ -85,108 +85,108 @@ public class TicTacToe {
             caseO2 = randomGenerator.nextInt(3);
             
             if (intArray[caseO1][caseO2] == 0 || intArray[caseO1][caseO2] == -1){
-                valide = false;
+                valid = false;
             } else {
                 intArray[caseO1][caseO2] = -1;
-                valide = true;
+                valid = true;
             }
-        } while (valide == false);
+        } while (valid == false);
         
     }
     
     public static boolean verifierSiPlein (int[][] intArray)  {
         
-        boolean plein = false;
-        int compteur = 0;
+        boolean full = false;
+        int counter = 0;
         
         for (int j = 0; j < 3; ++j) {
                 for (int i = 0; i < 3; ++i) {
                     if (intArray[j][i] != 0 && intArray[j][i] != -1) {
-                        ++compteur;
+                        ++counter;
                     }
                 }
             }
-            if (compteur <= 0) {
-                plein = true;
+            if (counter <= 0) {
+                full = true;
             }
-           return plein;
+           return full;
     }
     
     public static boolean verifierSiGagner (int[][] intArray) {
         
-        boolean gagnant = false;
+        boolean winner = false;
         
         if (intArray[0][0] == 0 && intArray[0][1] == 0 && intArray[0][2] == 0) {
-            gagnant = true;
+            winner = true;
         } else if (intArray[1][0] == 0 && intArray[1][1] == 0 && intArray[1][2] == 0) {
-            gagnant = true;
+            winner = true;
         } else if (intArray[2][0] == 0 && intArray[2][1] == 0 && intArray[2][2] == 0) {
-            gagnant = true;
+            winner = true;
         } else if (intArray[0][0] == 0 && intArray[1][0] == 0 && intArray[2][0] == 0) {
-            gagnant = true;
+            winner = true;
         } else if (intArray[0][1] == 0 && intArray[1][1] == 0 && intArray[2][1] == 0) {
-            gagnant = true;
+            winner = true;
         } else if (intArray[0][2] == 0 && intArray[1][2] == 0 && intArray[2][2] == 0) {
-            gagnant = true;
+            winner = true;
         } else if (intArray[0][0] == 0 && intArray[1][1] == 0 && intArray[2][2] == 0) {
-            gagnant = true;
+            winner = true;
         } else if (intArray[0][2] == 0 && intArray[1][1] == 0 && intArray[2][0] == 0) {
-            gagnant = true;
+            winner = true;
         }
         
-        return gagnant;
+        return winner;
     }
     
     public static boolean verifierSiIAGagner(int[][] intArray) {
         
-        boolean IAGagnant = false;
+        boolean aiWinner = false;
         
         if (intArray[0][0] == -1 && intArray[0][1] == -1 && intArray[0][2] == -1) {
-            IAGagnant = true;
+            aiWinner = true;
         } else if (intArray[1][0] == -1 && intArray[1][1] == -1 && intArray[1][2] == -1) {
-            IAGagnant = true;
+            aiWinner = true;
         } else if (intArray[2][0] == -1 && intArray[2][1] == -1 && intArray[2][2] == -1) {
-            IAGagnant = true;
+            aiWinner = true;
         } else if (intArray[0][0] == -1 && intArray[1][0] == -1 && intArray[2][0] == -1) {
-            IAGagnant = true;
+            aiWinner = true;
         } else if (intArray[0][1] == -1 && intArray[1][1] == -1 && intArray[2][1] == -1) {
-            IAGagnant = true;
+            aiWinner = true;
         } else if (intArray[0][2] == -1 && intArray[1][2] == -1 && intArray[2][2] == -1) {
-            IAGagnant = true;
+            aiWinner = true;
         } else if (intArray[0][0] == -1 && intArray[1][1] == -1 && intArray[2][2] == -1) {
-            IAGagnant = true;
+            aiWinner = true;
         } else if (intArray[0][2] == -1 && intArray[1][1] == -1 && intArray[2][0] == -1) {
-            IAGagnant = true;
+            aiWinner = true;
         }
         
-        return IAGagnant;
+        return aiWinner;
     }
     
     public static void main(String[] args) {
        
-        boolean gagnant = false;
-        boolean IAGagnant = false;
-        boolean plein;
+        boolean winner = false;
+        boolean aiWinner = false;
+        boolean full;
         int[][] intArray = new int[3][3];
 
         initialiserMatrice(intArray);
         afficherTableau(intArray);
        do {
             tourJoueur(intArray);
-            gagnant = verifierSiGagner(intArray);
-            if (gagnant == false) {
+            winner = verifierSiGagner(intArray);
+            if (winner == false) {
                 tourIA(intArray);
-                IAGagnant = verifierSiIAGagner(intArray);
+                aiWinner = verifierSiIAGagner(intArray);
             }
             afficherTableau(intArray);
-            plein = verifierSiPlein(intArray);
-        }  while (gagnant == false && plein == false && IAGagnant == false);
+            full = verifierSiPlein(intArray);
+        }  while (winner == false && full == false && aiWinner == false);
        
-       if ( gagnant == true) {
+       if ( winner == true) {
            System.out.println("\nVous avez gagné.");
-       } else if (IAGagnant == true) {
+       } else if (aiWinner == true) {
            System.out.println("\nL'IA a remporté la partie.");
-       } else if (plein == true) {
+       } else if (full == true) {
            System.out.println("\nÉgalité.");
        }
         
