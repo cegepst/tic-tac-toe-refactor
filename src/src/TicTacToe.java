@@ -74,16 +74,14 @@ public class TicTacToe {
     }
     
     public static void tourJoueur () {
-        
-        Scanner scanner = new Scanner(System.in);
         boolean valid;
-        int caseX;
+        int input;
         
         do {
-              System.out.printf("Sélectionnez une case (1-9): ");
-              caseX = scanner.nextInt();
+              Console.print("Sélectionnez une case (1-9): ");
+              input = Console.readInt();
               
-              if (caseX < 1 || caseX > 9) {
+              if (input < 1 || input > 9) {
                   valid = false;
                   Console.print("Valeur doit etre entre 1 et 9");
               } else {
@@ -91,7 +89,7 @@ public class TicTacToe {
               }
           } while (!valid);
         
-        switch (caseX) {
+        switch (input) {
             case 1 : grid[0][0] = 0;break;
             case 2 : grid[0][1] = 0;break;
             case 3 : grid[0][2] = 0;break;
