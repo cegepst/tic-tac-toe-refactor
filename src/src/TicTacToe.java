@@ -18,10 +18,10 @@ public class TicTacToe {
         afficherTableau();
         do {
             tourJoueur();
-            winner = verifierSiGagner();
+            winner = verifierSiGagner(PLAYER_TILE);
             if (!winner) {
                 tourIA();
-                aiWinner = verifierSiIAGagner();
+                aiWinner = verifierSiGagner(AI_TILE);
             }
             afficherTableau();
             full = verifierSiPlein();
@@ -147,57 +147,25 @@ public class TicTacToe {
            return full;
     }
     
-    public static boolean verifierSiGagner () {
-        
-        boolean winner = false;
-        
-        if (grid[0][0] == 0 && grid[0][1] == 0 && grid[0][2] == 0) {
-            winner = true;
-        } else if (grid[1][0] == 0 && grid[1][1] == 0 && grid[1][2] == 0) {
-            winner = true;
-        } else if (grid[2][0] == 0 && grid[2][1] == 0 && grid[2][2] == 0) {
-            winner = true;
-        } else if (grid[0][0] == 0 && grid[1][0] == 0 && grid[2][0] == 0) {
-            winner = true;
-        } else if (grid[0][1] == 0 && grid[1][1] == 0 && grid[2][1] == 0) {
-            winner = true;
-        } else if (grid[0][2] == 0 && grid[1][2] == 0 && grid[2][2] == 0) {
-            winner = true;
-        } else if (grid[0][0] == 0 && grid[1][1] == 0 && grid[2][2] == 0) {
-            winner = true;
-        } else if (grid[0][2] == 0 && grid[1][1] == 0 && grid[2][0] == 0) {
-            winner = true;
+    public static boolean verifierSiGagner(int joueur) {
+
+        if ((grid[0][0] == joueur && grid[0][1] == joueur && grid[0][2] == joueur) ||
+                (grid[1][0] == joueur && grid[1][1] == joueur && grid[1][2] == joueur) ||
+                (grid[2][0] == joueur && grid[2][1] == joueur && grid[2][2] == joueur) ||
+
+                (grid[0][0] == joueur && grid[1][0] == joueur && grid[2][0] == joueur) ||
+                (grid[0][1] == joueur && grid[1][1] == joueur && grid[2][1] == joueur) ||
+                (grid[0][2] == joueur && grid[1][2] == joueur && grid[2][2] == joueur) ||
+
+                (grid[0][0] == joueur && grid[1][1] == joueur && grid[2][2] == joueur) ||
+                (grid[0][2] == joueur && grid[1][1] == joueur && grid[2][0] == joueur)) {
+            return true;
         }
-        
-        return winner;
+        return false;
     }
-    
-    public static boolean verifierSiIAGagner() {
-        
-        boolean aiWinner = false;
-        
-        if (grid[0][0] == -1 && grid[0][1] == -1 && grid[0][2] == -1) {
-            aiWinner = true;
-        } else if (grid[1][0] == -1 && grid[1][1] == -1 && grid[1][2] == -1) {
-            aiWinner = true;
-        } else if (grid[2][0] == -1 && grid[2][1] == -1 && grid[2][2] == -1) {
-            aiWinner = true;
-        } else if (grid[0][0] == -1 && grid[1][0] == -1 && grid[2][0] == -1) {
-            aiWinner = true;
-        } else if (grid[0][1] == -1 && grid[1][1] == -1 && grid[2][1] == -1) {
-            aiWinner = true;
-        } else if (grid[0][2] == -1 && grid[1][2] == -1 && grid[2][2] == -1) {
-            aiWinner = true;
-        } else if (grid[0][0] == -1 && grid[1][1] == -1 && grid[2][2] == -1) {
-            aiWinner = true;
-        } else if (grid[0][2] == -1 && grid[1][1] == -1 && grid[2][0] == -1) {
-            aiWinner = true;
-        }
-        
-        return aiWinner;
-    }
-    
 
 
-    
+
+
+
 }
