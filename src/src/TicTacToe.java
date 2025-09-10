@@ -101,17 +101,14 @@ public class TicTacToe {
             case 9 : grid[2][2] = 0;break;
         }
     }
-    
+
     public static void tourIA () {
         
         Random randomGenerator = new Random();
         boolean valid;
 
-
         int caseO1;
         int caseO2;
-        
-        
         
         do {
             caseO1 = randomGenerator.nextInt(3);
@@ -124,25 +121,20 @@ public class TicTacToe {
                 valid = true;
             }
         } while (valid == false);
-        
     }
     
     public static boolean verifierSiPlein ()  {
-        
-        boolean full = false;
+
         int counter = 0;
         
         for (int j = 0; j < 3; ++j) {
-                for (int i = 0; i < 3; ++i) {
-                    if (grid[j][i] != 0 && grid[j][i] != -1) {
-                        ++counter;
-                    }
+            for (int i = 0; i < 3; ++i) {
+                if (grid[j][i] != 0 && grid[j][i] != -1) {
+                    ++counter;
                 }
             }
-            if (counter <= 0) {
-                full = true;
-            }
-           return full;
+        }
+        return counter <= 0;
     }
     
     public static boolean verifierSiGagner(int joueur) {
