@@ -5,7 +5,7 @@ public class TicTacToe {
 
     public static void main(String[] args) {
 
-        boolean winner = false;
+        boolean winner;
         boolean aiWinner = false;
         boolean full;
         int[][] grid = new int[3][3];
@@ -15,19 +15,19 @@ public class TicTacToe {
         do {
             tourJoueur(grid);
             winner = verifierSiGagner(grid);
-            if (winner == false) {
+            if (!winner) {
                 tourIA(grid);
                 aiWinner = verifierSiIAGagner(grid);
             }
             afficherTableau(grid);
             full = verifierSiPlein(grid);
-        }  while (winner == false && full == false && aiWinner == false);
+        }  while (!winner && !full && !aiWinner);
 
-        if ( winner == true) {
+        if ( winner) {
             Console.print("Vous avez gagné.");
-        } else if (aiWinner == true) {
+        } else if (aiWinner) {
             Console.print("\nL'IA a remporté la partie.");
-        } else if (full == true) {
+        } else if (full) {
             Console.print("\nÉgalité.");
         }
 
@@ -85,7 +85,7 @@ public class TicTacToe {
               } else {
                   valid = true;
               }
-          } while (valid == false);
+          } while (!valid);
         
         switch (caseX) {
             case 1 : grid[0][0] = 0;break;
