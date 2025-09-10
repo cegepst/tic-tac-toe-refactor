@@ -24,17 +24,16 @@ public class TicTacToe {
         }  while (winner == false && full == false && aiWinner == false);
 
         if ( winner == true) {
-            System.out.println("\nVous avez gagné.");
+            Console.print("Vous avez gagné.");
         } else if (aiWinner == true) {
-            System.out.println("\nL'IA a remporté la partie.");
+            Console.print("\nL'IA a remporté la partie.");
         } else if (full == true) {
-            System.out.println("\nÉgalité.");
+            Console.print("\nÉgalité.");
         }
 
     }
         
     public static void afficherTableau(int[][] grid) {
-        System.out.println("Coucou");
         System.out.print("\n");
         
         for (int j = 0; j < 3; ++j) {
@@ -82,7 +81,7 @@ public class TicTacToe {
               
               if (caseX < 1 || caseX > 9) {
                   valid = false;
-                  System.out.println("Valeur doit etre entre 1 et 9");
+                  Console.print("Valeur doit etre entre 1 et 9");
               } else {
                   valid = true;
               }
