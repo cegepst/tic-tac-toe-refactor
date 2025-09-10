@@ -27,16 +27,20 @@ public class TicTacToe {
             full = verifierSiPlein();
         }  while (!winner && !full && !aiWinner);
 
-        if ( winner) {
+        afficherGagnant(winner, aiWinner, full);
+
+    }
+
+    private static void afficherGagnant(boolean winner, boolean aiWinner, boolean full) {
+        if (winner) {
             Console.print("Vous avez gagné.");
         } else if (aiWinner) {
             Console.print("\nL'IA a remporté la partie.");
         } else if (full) {
             Console.print("\nÉgalité.");
         }
-
     }
-        
+
     public static void afficherTableau() {
         System.out.print("\n");
         
