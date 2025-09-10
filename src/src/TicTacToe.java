@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class TicTacToe {
         
     public static void afficherTableau(int[][] intArray) {
-        
+        System.out.println("Coucou");
         System.out.print("\n");
         
         for (int j = 0; j < 3; ++j) {
