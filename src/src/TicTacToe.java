@@ -1,11 +1,10 @@
 import java.util.Random;
-import java.util.Scanner;
 
 public class TicTacToe {
 
-    private static int[][] grid = new int[3][3];
-    final static int AI_TILE = -1;
-    final static int PLAYER_TILE = 0;
+    private static final int[][] GRID = new int[3][3];
+    private final static int AI_TILE = -1;
+    private final static int PLAYER_TILE = 0;
 
     public static void main(String[] args) {
 
@@ -13,25 +12,24 @@ public class TicTacToe {
         boolean aiWinner = false;
         boolean full;
 
-
-        initialiserMatrice();
-        afficherTableau();
+        initializeGrid();
+        displayBoard();
         do {
-            tourJoueur();
-            winner = verifierSiGagner(PLAYER_TILE);
+            playerTurn();
+            winner = checkWin(PLAYER_TILE);
             if (!winner) {
-                tourIA();
-                aiWinner = verifierSiGagner(AI_TILE);
+                aiTurn();
+                aiWinner = checkWin(AI_TILE);
             }
-            afficherTableau();
-            full = verifierSiPlein();
+            displayBoard();
+            full = isFull();
         }  while (!winner && !full && !aiWinner);
 
-        afficherGagnant(winner, aiWinner, full);
+        displayWinner(winner, aiWinner, full);
 
     }
 
-    private static void afficherGagnant(boolean winner, boolean aiWinner, boolean full) {
+    private static void displayWinner(boolean winner, boolean aiWinner, boolean full) {
         if (winner) {
             Console.print("Vous avez gagné.");
         } else if (aiWinner) {
@@ -41,39 +39,39 @@ public class TicTacToe {
         }
     }
 
-    public static void afficherTableau() {
+    public static void displayBoard() {
         System.out.print("\n");
         
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
                
-                if (grid[j][i] == 0 && i == 2) {
+                if (GRID[j][i] == 0 && i == 2) {
                     System.out.print(" X\n");
-                } else if (grid[j][i] == 0 && i != 2) {
+                } else if (GRID[j][i] == 0 && i != 2) {
                     System.out.print(" X |");
-                } else if (grid[j][i] == -1 && i == 2) {
+                } else if (GRID[j][i] == -1 && i == 2) {
                     System.out.print(" O\n");
-                } else if (grid[j][i] == -1 && i != 2) {
+                } else if (GRID[j][i] == -1 && i != 2) {
                     System.out.print(" O |");
                 } else if (i == 2){
-                    System.out.printf(" %d\n", grid[j][i]);
+                    System.out.printf(" %d\n", GRID[j][i]);
                 } else {              
-                    System.out.printf(" %d |", grid[j][i]);
+                    System.out.printf(" %d |", GRID[j][i]);
                 } 
             }
         }
     }
     
-    public static void initialiserMatrice () {
+    public static void initializeGrid() {
         int k = 1;
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
-                grid[j][i] = k++;
+                GRID[j][i] = k++;
             }
         }
     }
     
-    public static void tourJoueur () {
+    public static void playerTurn() {
         boolean valid;
         int input;
         
@@ -90,19 +88,19 @@ public class TicTacToe {
           } while (!valid);
         
         switch (input) {
-            case 1 : grid[0][0] = 0;break;
-            case 2 : grid[0][1] = 0;break;
-            case 3 : grid[0][2] = 0;break;
-            case 4 : grid[1][0] = 0;break;
-            case 5 : grid[1][1] = 0;break;
-            case 6 : grid[1][2] = 0;break;
-            case 7 : grid[2][0] = 0;break;
-            case 8 : grid[2][1] = 0;break;
-            case 9 : grid[2][2] = 0;break;
+            case 1 : GRID[0][0] = 0;break;
+            case 2 : GRID[0][1] = 0;break;
+            case 3 : GRID[0][2] = 0;break;
+            case 4 : GRID[1][0] = 0;break;
+            case 5 : GRID[1][1] = 0;break;
+            case 6 : GRID[1][2] = 0;break;
+            case 7 : GRID[2][0] = 0;break;
+            case 8 : GRID[2][1] = 0;break;
+            case 9 : GRID[2][2] = 0;break;
         }
     }
 
-    public static void tourIA () {
+    public static void aiTurn() {
         
         Random randomGenerator = new Random();
         boolean valid;
@@ -114,22 +112,22 @@ public class TicTacToe {
             caseO1 = randomGenerator.nextInt(3);
             caseO2 = randomGenerator.nextInt(3);
             
-            if (grid[caseO1][caseO2] == PLAYER_TILE || grid[caseO1][caseO2] == AI_TILE){
+            if (GRID[caseO1][caseO2] == PLAYER_TILE || GRID[caseO1][caseO2] == AI_TILE){
                 valid = false;
             } else {
-                grid[caseO1][caseO2] = AI_TILE;
+                GRID[caseO1][caseO2] = AI_TILE;
                 valid = true;
             }
         } while (valid == false);
     }
     
-    public static boolean verifierSiPlein ()  {
+    public static boolean isFull()  {
 
         int counter = 0;
         
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
-                if (grid[j][i] != 0 && grid[j][i] != -1) {
+                if (GRID[j][i] != 0 && GRID[j][i] != -1) {
                     ++counter;
                 }
             }
@@ -137,18 +135,18 @@ public class TicTacToe {
         return counter <= 0;
     }
     
-    public static boolean verifierSiGagner(int joueur) {
+    public static boolean checkWin(int joueur) {
 
-        if ((grid[0][0] == joueur && grid[0][1] == joueur && grid[0][2] == joueur) ||
-                (grid[1][0] == joueur && grid[1][1] == joueur && grid[1][2] == joueur) ||
-                (grid[2][0] == joueur && grid[2][1] == joueur && grid[2][2] == joueur) ||
+        if ((GRID[0][0] == joueur && GRID[0][1] == joueur && GRID[0][2] == joueur) ||
+                (GRID[1][0] == joueur && GRID[1][1] == joueur && GRID[1][2] == joueur) ||
+                (GRID[2][0] == joueur && GRID[2][1] == joueur && GRID[2][2] == joueur) ||
 
-                (grid[0][0] == joueur && grid[1][0] == joueur && grid[2][0] == joueur) ||
-                (grid[0][1] == joueur && grid[1][1] == joueur && grid[2][1] == joueur) ||
-                (grid[0][2] == joueur && grid[1][2] == joueur && grid[2][2] == joueur) ||
+                (GRID[0][0] == joueur && GRID[1][0] == joueur && GRID[2][0] == joueur) ||
+                (GRID[0][1] == joueur && GRID[1][1] == joueur && GRID[2][1] == joueur) ||
+                (GRID[0][2] == joueur && GRID[1][2] == joueur && GRID[2][2] == joueur) ||
 
-                (grid[0][0] == joueur && grid[1][1] == joueur && grid[2][2] == joueur) ||
-                (grid[0][2] == joueur && grid[1][1] == joueur && grid[2][0] == joueur)) {
+                (GRID[0][0] == joueur && GRID[1][1] == joueur && GRID[2][2] == joueur) ||
+                (GRID[0][2] == joueur && GRID[1][1] == joueur && GRID[2][0] == joueur)) {
             return true;
         }
         return false;
