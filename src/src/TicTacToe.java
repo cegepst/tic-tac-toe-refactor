@@ -2,6 +2,36 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class TicTacToe {
+
+    public static void main(String[] args) {
+
+        boolean winner = false;
+        boolean aiWinner = false;
+        boolean full;
+        int[][] intArray = new int[3][3];
+
+        initialiserMatrice(intArray);
+        afficherTableau(intArray);
+        do {
+            tourJoueur(intArray);
+            winner = verifierSiGagner(intArray);
+            if (winner == false) {
+                tourIA(intArray);
+                aiWinner = verifierSiIAGagner(intArray);
+            }
+            afficherTableau(intArray);
+            full = verifierSiPlein(intArray);
+        }  while (winner == false && full == false && aiWinner == false);
+
+        if ( winner == true) {
+            System.out.println("\nVous avez gagné.");
+        } else if (aiWinner == true) {
+            System.out.println("\nL'IA a remporté la partie.");
+        } else if (full == true) {
+            System.out.println("\nÉgalité.");
+        }
+
+    }
         
     public static void afficherTableau(int[][] intArray) {
         System.out.println("Coucou");
@@ -162,35 +192,7 @@ public class TicTacToe {
         return aiWinner;
     }
     
-    public static void main(String[] args) {
-       
-        boolean winner = false;
-        boolean aiWinner = false;
-        boolean full;
-        int[][] intArray = new int[3][3];
 
-        initialiserMatrice(intArray);
-        afficherTableau(intArray);
-       do {
-            tourJoueur(intArray);
-            winner = verifierSiGagner(intArray);
-            if (winner == false) {
-                tourIA(intArray);
-                aiWinner = verifierSiIAGagner(intArray);
-            }
-            afficherTableau(intArray);
-            full = verifierSiPlein(intArray);
-        }  while (winner == false && full == false && aiWinner == false);
-       
-       if ( winner == true) {
-           System.out.println("\nVous avez gagné.");
-       } else if (aiWinner == true) {
-           System.out.println("\nL'IA a remporté la partie.");
-       } else if (full == true) {
-           System.out.println("\nÉgalité.");
-       }
-        
-    }
 
     
 }
