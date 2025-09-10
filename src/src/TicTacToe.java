@@ -3,24 +3,26 @@ import java.util.Scanner;
 
 public class TicTacToe {
 
+    private static int[][] grid = new int[3][3];
+
     public static void main(String[] args) {
 
         boolean winner;
         boolean aiWinner = false;
         boolean full;
-        int[][] grid = new int[3][3];
 
-        initialiserMatrice(grid);
-        afficherTableau(grid);
+
+        initialiserMatrice();
+        afficherTableau();
         do {
-            tourJoueur(grid);
-            winner = verifierSiGagner(grid);
+            tourJoueur();
+            winner = verifierSiGagner();
             if (!winner) {
-                tourIA(grid);
-                aiWinner = verifierSiIAGagner(grid);
+                tourIA();
+                aiWinner = verifierSiIAGagner();
             }
-            afficherTableau(grid);
-            full = verifierSiPlein(grid);
+            afficherTableau();
+            full = verifierSiPlein();
         }  while (!winner && !full && !aiWinner);
 
         if ( winner) {
@@ -33,7 +35,7 @@ public class TicTacToe {
 
     }
         
-    public static void afficherTableau(int[][] grid) {
+    public static void afficherTableau() {
         System.out.print("\n");
         
         for (int j = 0; j < 3; ++j) {
@@ -56,7 +58,7 @@ public class TicTacToe {
         }
     }
     
-    public static void initialiserMatrice (int[][] grid) {
+    public static void initialiserMatrice () {
         
         int k = 1;
         
@@ -69,7 +71,7 @@ public class TicTacToe {
         }
     }
     
-    public static void tourJoueur (int[][] grid) {
+    public static void tourJoueur () {
         
         Scanner scanner = new Scanner(System.in);
         boolean valid;
@@ -100,7 +102,7 @@ public class TicTacToe {
         }
     }
     
-    public static void tourIA (int[][] grid) {
+    public static void tourIA () {
         
         Random randomGenerator = new Random();
         boolean valid;
@@ -123,7 +125,7 @@ public class TicTacToe {
         
     }
     
-    public static boolean verifierSiPlein (int[][] grid)  {
+    public static boolean verifierSiPlein ()  {
         
         boolean full = false;
         int counter = 0;
@@ -141,7 +143,7 @@ public class TicTacToe {
            return full;
     }
     
-    public static boolean verifierSiGagner (int[][] grid) {
+    public static boolean verifierSiGagner () {
         
         boolean winner = false;
         
@@ -166,7 +168,7 @@ public class TicTacToe {
         return winner;
     }
     
-    public static boolean verifierSiIAGagner(int[][] grid) {
+    public static boolean verifierSiIAGagner() {
         
         boolean aiWinner = false;
         
