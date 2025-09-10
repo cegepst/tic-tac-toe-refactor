@@ -4,8 +4,6 @@ import java.util.Scanner;
 public class TicTacToe {
 
     private static int[][] grid = new int[3][3];
-    final static int AI_TILE = -1;
-    final static int PLAYER_TILE = 0;
 
     public static void main(String[] args) {
 
@@ -36,13 +34,13 @@ public class TicTacToe {
         }
 
     }
-        
+
     public static void afficherTableau() {
         System.out.print("\n");
-        
+
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
-               
+
                 if (grid[j][i] == 0 && i == 2) {
                     System.out.print(" X\n");
                 } else if (grid[j][i] == 0 && i != 2) {
@@ -53,36 +51,32 @@ public class TicTacToe {
                     System.out.print(" O |");
                 } else if (i == 2){
                     System.out.printf(" %d\n", grid[j][i]);
-                } else {              
+                } else {
                     System.out.printf(" %d |", grid[j][i]);
-                } 
+                }
             }
         }
     }
-    
+
     public static void initialiserMatrice () {
-        
         int k = 1;
-        
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
-                
-                grid[j][i] = k;
-                ++k;        
+                grid[j][i] = k++;
             }
         }
     }
-    
+
     public static void tourJoueur () {
-        
+
         Scanner scanner = new Scanner(System.in);
         boolean valid;
         int caseX;
-        
+
         do {
               System.out.printf("Sélectionnez une case (1-9): ");
               caseX = scanner.nextInt();
-              
+
               if (caseX < 1 || caseX > 9) {
                   valid = false;
                   Console.print("Valeur doit etre entre 1 et 9");
@@ -90,7 +84,7 @@ public class TicTacToe {
                   valid = true;
               }
           } while (!valid);
-        
+
         switch (caseX) {
             case 1 : grid[0][0] = 0;break;
             case 2 : grid[0][1] = 0;break;
@@ -103,26 +97,24 @@ public class TicTacToe {
             case 9 : grid[2][2] = 0;break;
         }
     }
-    
+
     public static void tourIA () {
-        
+
         Random randomGenerator = new Random();
         boolean valid;
-
-
         int caseO1;
         int caseO2;
-        
-        
-        
+
+
+
         do {
             caseO1 = randomGenerator.nextInt(3);
             caseO2 = randomGenerator.nextInt(3);
-            
-            if (grid[caseO1][caseO2] == PLAYER_TILE || grid[caseO1][caseO2] == AI_TILE){
+
+            if (grid[caseO1][caseO2] == 0 || grid[caseO1][caseO2] == -1){
                 valid = false;
             } else {
-                grid[caseO1][caseO2] = AI_TILE;
+                grid[caseO1][caseO2] = -1;
                 valid = true;
             }
         } while (valid == false);
@@ -146,7 +138,7 @@ public class TicTacToe {
             }
            return full;
     }
-    
+
     public static boolean verifierSiGagner () {
         
         boolean winner = false;
