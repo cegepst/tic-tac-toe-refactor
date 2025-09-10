@@ -8,19 +8,19 @@ public class TicTacToe {
         boolean winner = false;
         boolean aiWinner = false;
         boolean full;
-        int[][] intArray = new int[3][3];
+        int[][] grid = new int[3][3];
 
-        initialiserMatrice(intArray);
-        afficherTableau(intArray);
+        initialiserMatrice(grid);
+        afficherTableau(grid);
         do {
-            tourJoueur(intArray);
-            winner = verifierSiGagner(intArray);
+            tourJoueur(grid);
+            winner = verifierSiGagner(grid);
             if (winner == false) {
-                tourIA(intArray);
-                aiWinner = verifierSiIAGagner(intArray);
+                tourIA(grid);
+                aiWinner = verifierSiIAGagner(grid);
             }
-            afficherTableau(intArray);
-            full = verifierSiPlein(intArray);
+            afficherTableau(grid);
+            full = verifierSiPlein(grid);
         }  while (winner == false && full == false && aiWinner == false);
 
         if ( winner == true) {
@@ -33,44 +33,44 @@ public class TicTacToe {
 
     }
         
-    public static void afficherTableau(int[][] intArray) {
+    public static void afficherTableau(int[][] grid) {
         System.out.println("Coucou");
         System.out.print("\n");
         
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
                
-                if (intArray[j][i] == 0 && i == 2) {
+                if (grid[j][i] == 0 && i == 2) {
                     System.out.print(" X\n");
-                } else if (intArray[j][i] == 0 && i != 2) {
+                } else if (grid[j][i] == 0 && i != 2) {
                     System.out.print(" X |");
-                } else if (intArray[j][i] == -1 && i == 2) {
+                } else if (grid[j][i] == -1 && i == 2) {
                     System.out.print(" O\n");
-                } else if (intArray[j][i] == -1 && i != 2) {
+                } else if (grid[j][i] == -1 && i != 2) {
                     System.out.print(" O |");
                 } else if (i == 2){
-                    System.out.printf(" %d\n", intArray[j][i]);
+                    System.out.printf(" %d\n", grid[j][i]);
                 } else {              
-                    System.out.printf(" %d |", intArray[j][i]);
+                    System.out.printf(" %d |", grid[j][i]);
                 } 
             }
         }
     }
     
-    public static void initialiserMatrice (int[][] intArray) {
+    public static void initialiserMatrice (int[][] grid) {
         
         int k = 1;
         
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
                 
-                intArray[j][i] = k;
+                grid[j][i] = k;
                 ++k;        
             }
         }
     }
     
-    public static void tourJoueur (int[][] intArray) {
+    public static void tourJoueur (int[][] grid) {
         
         Scanner scanner = new Scanner(System.in);
         boolean valid;
@@ -89,19 +89,19 @@ public class TicTacToe {
           } while (valid == false);
         
         switch (caseX) {
-            case 1 : intArray[0][0] = 0;break;
-            case 2 : intArray[0][1] = 0;break;
-            case 3 : intArray[0][2] = 0;break;
-            case 4 : intArray[1][0] = 0;break;
-            case 5 : intArray[1][1] = 0;break;
-            case 6 : intArray[1][2] = 0;break;
-            case 7 : intArray[2][0] = 0;break;
-            case 8 : intArray[2][1] = 0;break;
-            case 9 : intArray[2][2] = 0;break;
+            case 1 : grid[0][0] = 0;break;
+            case 2 : grid[0][1] = 0;break;
+            case 3 : grid[0][2] = 0;break;
+            case 4 : grid[1][0] = 0;break;
+            case 5 : grid[1][1] = 0;break;
+            case 6 : grid[1][2] = 0;break;
+            case 7 : grid[2][0] = 0;break;
+            case 8 : grid[2][1] = 0;break;
+            case 9 : grid[2][2] = 0;break;
         }
     }
     
-    public static void tourIA (int[][] intArray) {
+    public static void tourIA (int[][] grid) {
         
         Random randomGenerator = new Random();
         boolean valid;
@@ -114,24 +114,24 @@ public class TicTacToe {
             caseO1 = randomGenerator.nextInt(3);
             caseO2 = randomGenerator.nextInt(3);
             
-            if (intArray[caseO1][caseO2] == 0 || intArray[caseO1][caseO2] == -1){
+            if (grid[caseO1][caseO2] == 0 || grid[caseO1][caseO2] == -1){
                 valid = false;
             } else {
-                intArray[caseO1][caseO2] = -1;
+                grid[caseO1][caseO2] = -1;
                 valid = true;
             }
         } while (valid == false);
         
     }
     
-    public static boolean verifierSiPlein (int[][] intArray)  {
+    public static boolean verifierSiPlein (int[][] grid)  {
         
         boolean full = false;
         int counter = 0;
         
         for (int j = 0; j < 3; ++j) {
                 for (int i = 0; i < 3; ++i) {
-                    if (intArray[j][i] != 0 && intArray[j][i] != -1) {
+                    if (grid[j][i] != 0 && grid[j][i] != -1) {
                         ++counter;
                     }
                 }
@@ -142,50 +142,50 @@ public class TicTacToe {
            return full;
     }
     
-    public static boolean verifierSiGagner (int[][] intArray) {
+    public static boolean verifierSiGagner (int[][] grid) {
         
         boolean winner = false;
         
-        if (intArray[0][0] == 0 && intArray[0][1] == 0 && intArray[0][2] == 0) {
+        if (grid[0][0] == 0 && grid[0][1] == 0 && grid[0][2] == 0) {
             winner = true;
-        } else if (intArray[1][0] == 0 && intArray[1][1] == 0 && intArray[1][2] == 0) {
+        } else if (grid[1][0] == 0 && grid[1][1] == 0 && grid[1][2] == 0) {
             winner = true;
-        } else if (intArray[2][0] == 0 && intArray[2][1] == 0 && intArray[2][2] == 0) {
+        } else if (grid[2][0] == 0 && grid[2][1] == 0 && grid[2][2] == 0) {
             winner = true;
-        } else if (intArray[0][0] == 0 && intArray[1][0] == 0 && intArray[2][0] == 0) {
+        } else if (grid[0][0] == 0 && grid[1][0] == 0 && grid[2][0] == 0) {
             winner = true;
-        } else if (intArray[0][1] == 0 && intArray[1][1] == 0 && intArray[2][1] == 0) {
+        } else if (grid[0][1] == 0 && grid[1][1] == 0 && grid[2][1] == 0) {
             winner = true;
-        } else if (intArray[0][2] == 0 && intArray[1][2] == 0 && intArray[2][2] == 0) {
+        } else if (grid[0][2] == 0 && grid[1][2] == 0 && grid[2][2] == 0) {
             winner = true;
-        } else if (intArray[0][0] == 0 && intArray[1][1] == 0 && intArray[2][2] == 0) {
+        } else if (grid[0][0] == 0 && grid[1][1] == 0 && grid[2][2] == 0) {
             winner = true;
-        } else if (intArray[0][2] == 0 && intArray[1][1] == 0 && intArray[2][0] == 0) {
+        } else if (grid[0][2] == 0 && grid[1][1] == 0 && grid[2][0] == 0) {
             winner = true;
         }
         
         return winner;
     }
     
-    public static boolean verifierSiIAGagner(int[][] intArray) {
+    public static boolean verifierSiIAGagner(int[][] grid) {
         
         boolean aiWinner = false;
         
-        if (intArray[0][0] == -1 && intArray[0][1] == -1 && intArray[0][2] == -1) {
+        if (grid[0][0] == -1 && grid[0][1] == -1 && grid[0][2] == -1) {
             aiWinner = true;
-        } else if (intArray[1][0] == -1 && intArray[1][1] == -1 && intArray[1][2] == -1) {
+        } else if (grid[1][0] == -1 && grid[1][1] == -1 && grid[1][2] == -1) {
             aiWinner = true;
-        } else if (intArray[2][0] == -1 && intArray[2][1] == -1 && intArray[2][2] == -1) {
+        } else if (grid[2][0] == -1 && grid[2][1] == -1 && grid[2][2] == -1) {
             aiWinner = true;
-        } else if (intArray[0][0] == -1 && intArray[1][0] == -1 && intArray[2][0] == -1) {
+        } else if (grid[0][0] == -1 && grid[1][0] == -1 && grid[2][0] == -1) {
             aiWinner = true;
-        } else if (intArray[0][1] == -1 && intArray[1][1] == -1 && intArray[2][1] == -1) {
+        } else if (grid[0][1] == -1 && grid[1][1] == -1 && grid[2][1] == -1) {
             aiWinner = true;
-        } else if (intArray[0][2] == -1 && intArray[1][2] == -1 && intArray[2][2] == -1) {
+        } else if (grid[0][2] == -1 && grid[1][2] == -1 && grid[2][2] == -1) {
             aiWinner = true;
-        } else if (intArray[0][0] == -1 && intArray[1][1] == -1 && intArray[2][2] == -1) {
+        } else if (grid[0][0] == -1 && grid[1][1] == -1 && grid[2][2] == -1) {
             aiWinner = true;
-        } else if (intArray[0][2] == -1 && intArray[1][1] == -1 && intArray[2][0] == -1) {
+        } else if (grid[0][2] == -1 && grid[1][1] == -1 && grid[2][0] == -1) {
             aiWinner = true;
         }
         
