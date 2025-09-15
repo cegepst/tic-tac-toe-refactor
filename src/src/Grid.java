@@ -17,13 +17,13 @@ public class Grid {
         }
     }
 
-    public void setTile(int row, int col, int character) {
-        grid[row][col] = character;
+    public void setTile(Position position, int character) {
+        position.place(grid, character);
     }
 
-    public boolean isTileEmpty(int row, int col) {
-        return !(grid[row][col] == Player.TILE
-                || grid[row][col] == Ai.TILE);
+    public boolean isTileEmpty(Position position) {
+        return !(grid[position.getRow()][position.getCol()] == Player.TILE
+                || grid[position.getRow()][position.getCol()] == Ai.TILE);
     }
 
     public void display() {

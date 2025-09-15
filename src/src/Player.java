@@ -5,7 +5,6 @@ public class Player {
     public void turn(Grid grid) {
         boolean valid;
         int input;
-
         do {
             Console.print("Sélectionnez une case (1-9): ");
             input = Console.readInt();
@@ -17,7 +16,6 @@ public class Player {
                 valid = true;
             }
         } while (!valid);
-
-        grid.setTile((input - 1) / 3, (input - 1) % 3, TILE);
+        grid.setTile(new Position((input - 1) / 3, (input - 1) % 3), TILE);
     }
 }
