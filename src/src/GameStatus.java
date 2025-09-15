@@ -1,44 +1,44 @@
 public class GameStatus {
 
-    private boolean winner;
-    private boolean aiWinner;
-    private boolean full;
+    private boolean playerWon;
+    private boolean aiWon;
+    private boolean tie;
 
     public boolean hasGameEnded() {
-        return winner || full || aiWinner;
+        return playerWon || tie || aiWon;
     }
 
     public void displayWinner() {
-        if (winner) {
+        if (playerWon) {
             Console.print("Vous avez gagné.");
-        } else if (aiWinner) {
+        } else if (aiWon) {
             Console.print("\nL'IA a remporté la partie.");
-        } else if (full) {
+        } else if (tie) {
             Console.print("\nÉgalité.");
         }
     }
 
-    public boolean isWinner() {
-        return winner;
+    public boolean hasPlayerWon() {
+        return playerWon;
     }
 
-    public boolean isAiWinner() {
-        return aiWinner;
+    public boolean hasAiWon() {
+        return aiWon;
     }
 
-    public boolean isFull() {
-        return full;
+    public boolean isTie() {
+        return tie;
     }
 
-    public void setWinner(boolean winner) {
-        this.winner = winner;
+    public void setPlayerWon(boolean playerWon) {
+        this.playerWon = playerWon;
     }
 
-    public void setAiWinner(boolean aiWinner) {
-        this.aiWinner = aiWinner;
+    public void setAiWon(boolean aiWon) {
+        this.aiWon = aiWon;
     }
 
-    public void setFull(boolean full) {
-        this.full = full;
+    public void setTie(boolean tie) {
+        this.tie = tie;
     }
 }

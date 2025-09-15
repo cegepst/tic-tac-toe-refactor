@@ -1,7 +1,5 @@
 public class Game {
 
-    private final static int AI_TILE = -1;
-
     private Grid grid;
     private Player player;
     private Ai ai;
@@ -18,12 +16,12 @@ public class Game {
         do {
             grid.display();
             player.turn(grid);
-            gameStatus.setWinner(grid.checkWin(Player.TILE));
-            if (!gameStatus.isWinner()) {
+            gameStatus.setPlayerWon(grid.checkWin(Player.TILE));
+            if (!gameStatus.hasPlayerWon()) {
                 ai.turn(grid);
-                gameStatus.setAiWinner(grid.checkWin(AI_TILE));
+                gameStatus.setAiWon(grid.checkWin(Ai.TILE));
             }
-            gameStatus.setFull(grid.isFull());
+            gameStatus.setTie(grid.isFull());
         }  while (!gameStatus.hasGameEnded());
         grid.display();
         gameStatus.displayWinner();
