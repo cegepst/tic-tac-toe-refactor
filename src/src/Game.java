@@ -17,7 +17,7 @@ public class Game {
         boolean aiWinner = false;
         boolean full;
 
-        this.grid.displayBoard();
+        this.grid.display();
         do {
             player.turn(grid);
             winner = this.grid.checkWin(Player.TILE);
@@ -25,7 +25,7 @@ public class Game {
                 ai.turn(grid);
                 aiWinner = this.grid.checkWin(AI_TILE);
             }
-            this.grid.displayBoard();
+            this.grid.display();
             full = this.grid.isFull();
         }  while (!winner && !full && !aiWinner);
 

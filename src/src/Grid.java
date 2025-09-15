@@ -26,7 +26,7 @@ public class Grid {
                 || grid[row][col] == Ai.TILE);
     }
 
-    public void displayBoard() {
+    public void display() {
         System.out.print("\n");
         
         for (int j = 0; j < 3; ++j) {
