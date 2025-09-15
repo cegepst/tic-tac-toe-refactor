@@ -14,7 +14,6 @@ public class Game {
         boolean aiWinner = false;
         boolean full;
 
-        this.grid.initializeGrid();
         this.grid.displayBoard();
         do {
             this.grid.playerTurn();

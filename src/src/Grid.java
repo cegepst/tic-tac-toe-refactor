@@ -6,6 +6,10 @@ public class Grid {
     private final static int AI_TILE = -1;
     private final static int PLAYER_TILE = 0;
 
+    public Grid() {
+        initialize();
+    }
+
     public void displayWinner(boolean winner, boolean aiWinner, boolean full) {
         if (winner) {
             Console.print("Vous avez gagné.");
@@ -35,15 +39,6 @@ public class Grid {
                 } else {              
                     System.out.printf(" %d |", GRID[j][i]);
                 } 
-            }
-        }
-    }
-
-    public void initializeGrid() {
-        int k = 1;
-        for (int j = 0; j < 3; ++j) {
-            for (int i = 0; i < 3; ++i) {
-                GRID[j][i] = k++;
             }
         }
     }
@@ -117,5 +112,14 @@ public class Grid {
             return true;
         }
         return false;
+    }
+
+    private void initialize() {
+        int k = 1;
+        for (int j = 0; j < 3; ++j) {
+            for (int i = 0; i < 3; ++i) {
+                GRID[j][i] = k++;
+            }
+        }
     }
 }
