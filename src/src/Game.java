@@ -14,16 +14,20 @@ public class Game {
 
     public void play() {
         do {
-            grid.display();
-            player.turn(grid);
-            gameStatus.setPlayerWon(grid.checkWin(Player.TILE));
-            if (!gameStatus.hasPlayerWon()) {
-                ai.turn(grid);
-                gameStatus.setAiWon(grid.checkWin(Ai.TILE));
-            }
-            gameStatus.setTie(grid.isFull());
+            playRound();
         }  while (!gameStatus.hasGameEnded());
         grid.display();
         gameStatus.displayWinner();
+    }
+
+    private void playRound() {
+        grid.display();
+        player.turn(grid);
+        gameStatus.setPlayerWon(grid.checkWin(Player.TILE));
+        if (!gameStatus.hasPlayerWon()) {
+            ai.turn(grid);
+            gameStatus.setAiWon(grid.checkWin(Ai.TILE));
+        }
+        gameStatus.setTie(grid.isFull());
     }
 }
