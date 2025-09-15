@@ -1,12 +1,13 @@
 public class Game {
 
     private final static int AI_TILE = -1;
-    private final static int PLAYER_TILE = 0;
 
     private Grid grid;
+    private Player player;
 
     public Game() {
-        this.grid = new Grid();
+        grid = new Grid();
+        player = new Player();
     }
 
     public void play() {
@@ -16,8 +17,8 @@ public class Game {
 
         this.grid.displayBoard();
         do {
-            this.grid.playerTurn();
-            winner = this.grid.checkWin(PLAYER_TILE);
+            player.turn(grid);
+            winner = this.grid.checkWin(Player.TILE);
             if (!winner) {
                 this.grid.aiTurn();
                 aiWinner = this.grid.checkWin(AI_TILE);
