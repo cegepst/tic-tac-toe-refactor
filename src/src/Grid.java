@@ -1,35 +1,12 @@
 import java.util.Random;
 
-public class TicTacToe {
+public class Grid {
 
     private static final int[][] GRID = new int[3][3];
     private final static int AI_TILE = -1;
     private final static int PLAYER_TILE = 0;
 
-    public static void main(String[] args) {
-
-        boolean winner;
-        boolean aiWinner = false;
-        boolean full;
-
-        initializeGrid();
-        displayBoard();
-        do {
-            playerTurn();
-            winner = checkWin(PLAYER_TILE);
-            if (!winner) {
-                aiTurn();
-                aiWinner = checkWin(AI_TILE);
-            }
-            displayBoard();
-            full = isFull();
-        }  while (!winner && !full && !aiWinner);
-
-        displayWinner(winner, aiWinner, full);
-
-    }
-
-    private static void displayWinner(boolean winner, boolean aiWinner, boolean full) {
+    public void displayWinner(boolean winner, boolean aiWinner, boolean full) {
         if (winner) {
             Console.print("Vous avez gagné.");
         } else if (aiWinner) {
@@ -39,7 +16,7 @@ public class TicTacToe {
         }
     }
 
-    public static void displayBoard() {
+    public void displayBoard() {
         System.out.print("\n");
         
         for (int j = 0; j < 3; ++j) {
@@ -61,8 +38,8 @@ public class TicTacToe {
             }
         }
     }
-    
-    public static void initializeGrid() {
+
+    public void initializeGrid() {
         int k = 1;
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
@@ -70,8 +47,8 @@ public class TicTacToe {
             }
         }
     }
-    
-    public static void playerTurn() {
+
+    public void playerTurn() {
         boolean valid;
         int input;
         
@@ -90,7 +67,7 @@ public class TicTacToe {
         GRID[((input - 1) / 3)][(input - 1) % 3] = PLAYER_TILE;
     }
 
-    public static void aiTurn() {
+    public void aiTurn() {
         
         Random randomGenerator = new Random();
         boolean valid;
@@ -110,8 +87,8 @@ public class TicTacToe {
             }
         } while (valid == false);
     }
-    
-    public static boolean isFull()  {
+
+    public boolean isFull()  {
 
         int counter = 0;
         
@@ -124,8 +101,8 @@ public class TicTacToe {
         }
         return counter <= 0;
     }
-    
-    public static boolean checkWin(int joueur) {
+
+    public boolean checkWin(int joueur) {
 
         if ((GRID[0][0] == joueur && GRID[0][1] == joueur && GRID[0][2] == joueur) ||
                 (GRID[1][0] == joueur && GRID[1][1] == joueur && GRID[1][2] == joueur) ||
@@ -141,9 +118,4 @@ public class TicTacToe {
         }
         return false;
     }
-
-
-
-
-
 }
