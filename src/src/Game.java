@@ -4,10 +4,12 @@ public class Game {
 
     private Grid grid;
     private Player player;
+    private Ai ai;
 
     public Game() {
         grid = new Grid();
         player = new Player();
+        ai = new Ai();
     }
 
     public void play() {
@@ -20,7 +22,7 @@ public class Game {
             player.turn(grid);
             winner = this.grid.checkWin(Player.TILE);
             if (!winner) {
-                this.grid.aiTurn();
+                ai.turn(grid);
                 aiWinner = this.grid.checkWin(AI_TILE);
             }
             this.grid.displayBoard();

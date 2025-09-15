@@ -1,8 +1,5 @@
-import java.util.Random;
 
 public class Grid {
-
-    private final static int AI_TILE = -1;
 
     private int[][] grid = new int[3][3];
 
@@ -22,6 +19,11 @@ public class Grid {
 
     public void setTile(int row, int col, int character) {
         grid[row][col] = character;
+    }
+
+    public boolean isTileEmpty(int row, int col) {
+        return !(grid[row][col] == Player.TILE
+                || grid[row][col] == Ai.TILE);
     }
 
     public void displayBoard() {
@@ -47,25 +49,7 @@ public class Grid {
         }
     }
 
-    public void aiTurn() {
-        Random randomGenerator = new Random();
-        boolean valid;
 
-        int caseO1;
-        int caseO2;
-        
-        do {
-            caseO1 = randomGenerator.nextInt(3);
-            caseO2 = randomGenerator.nextInt(3);
-            
-            if (grid[caseO1][caseO2] == Player.TILE || grid[caseO1][caseO2] == AI_TILE){
-                valid = false;
-            } else {
-                grid[caseO1][caseO2] = AI_TILE;
-                valid = true;
-            }
-        } while (valid == false);
-    }
 
     public boolean isFull()  {
 
