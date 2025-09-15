@@ -5,30 +5,27 @@ public class Game {
     private Grid grid;
     private Player player;
     private Ai ai;
+    private GameStatus gameStatus;
 
     public Game() {
         grid = new Grid();
         player = new Player();
         ai = new Ai();
+        gameStatus = new GameStatus();
     }
 
     public void play() {
-        boolean winner;
-        boolean aiWinner = false;
-        boolean full;
-
-        this.grid.display();
         do {
+            grid.display();
             player.turn(grid);
-            winner = this.grid.checkWin(Player.TILE);
-            if (!winner) {
+            gameStatus.setWinner(grid.checkWin(Player.TILE));
+            if (!gameStatus.isWinner()) {
                 ai.turn(grid);
-                aiWinner = this.grid.checkWin(AI_TILE);
+                gameStatus.setAiWinner(grid.checkWin(AI_TILE));
             }
-            this.grid.display();
-            full = this.grid.isFull();
-        }  while (!winner && !full && !aiWinner);
-
-        this.grid.displayWinner(winner, aiWinner, full);
+            gameStatus.setFull(grid.isFull());
+        }  while (!gameStatus.hasGameEnded());
+        grid.display();
+        gameStatus.displayWinner();
     }
 }

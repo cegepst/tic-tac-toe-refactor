@@ -7,16 +7,6 @@ public class Grid {
         initialize();
     }
 
-    public void displayWinner(boolean winner, boolean aiWinner, boolean full) {
-        if (winner) {
-            Console.print("Vous avez gagné.");
-        } else if (aiWinner) {
-            Console.print("\nL'IA a remporté la partie.");
-        } else if (full) {
-            Console.print("\nÉgalité.");
-        }
-    }
-
     public void setTile(Position position, int character) {
         position.place(grid, character);
     }
