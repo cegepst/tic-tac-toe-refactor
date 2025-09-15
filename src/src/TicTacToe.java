@@ -86,18 +86,8 @@ public class TicTacToe {
                   valid = true;
               }
           } while (!valid);
-        
-        switch (input) {
-            case 1 : GRID[0][0] = 0;break;
-            case 2 : GRID[0][1] = 0;break;
-            case 3 : GRID[0][2] = 0;break;
-            case 4 : GRID[1][0] = 0;break;
-            case 5 : GRID[1][1] = 0;break;
-            case 6 : GRID[1][2] = 0;break;
-            case 7 : GRID[2][0] = 0;break;
-            case 8 : GRID[2][1] = 0;break;
-            case 9 : GRID[2][2] = 0;break;
-        }
+
+        GRID[((input - 1) / 3)][(input - 1) % 3] = PLAYER_TILE;
     }
 
     public static void aiTurn() {
